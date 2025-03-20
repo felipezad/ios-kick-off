@@ -13,3 +13,16 @@ print("Albums size: \(albums.count)")
 let setOfAlbums = Set(albums)
 print("Unique albums size: \(setOfAlbums.count)")
 
+
+for number in 1...100 {
+  if(number.isMultiple(of: 3) && number.isMultiple(of: 5)){
+    print("FizzBuzz -> number: \(number)\n")
+  }else if(number.isMultiple(of: 3)){
+    print("Fizz -> number: \(number)\n")
+  }else if (number.isMultiple(of: 5)){
+    print("Buzz -> number: \(number)\n")
+  } else {
+     print("Number: \(number)\n")
+  }
+}
+
