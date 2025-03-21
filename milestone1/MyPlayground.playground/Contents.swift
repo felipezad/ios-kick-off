@@ -83,3 +83,76 @@ struct Car {
 var car = Car(model: "XYZ", numberOfSeats: 6, currentGear: 1)
 car.changeGear(2)
 
+class Animal {
+  let legs : Int
+  
+  init(_ legs: Int) {
+    self.legs = legs
+  }
+}
+
+class Dog : Animal {
+  override init(_ legs: Int) {
+    super.init(legs)
+  }
+  
+  func speak(){
+    print("Dog speak")
+  }
+}
+
+class Corgi : Dog {
+  override init(_ legs: Int) {
+    super.init(legs)
+  }
+  override func speak() {
+    print("corgi speak")
+  }
+}
+
+class Poodle : Dog {
+  override init(_ legs: Int) {
+    super.init(legs)
+  }
+  
+  override func speak() {
+    print("poddle speak")
+  }
+}
+
+class Cat : Animal {
+  override init(_ legs: Int) {
+    super.init(legs)
+  }
+  func speak(){
+    print("Cat speak")
+  }
+}
+
+class Persian : Cat {
+  override init(_ legs: Int) {
+    super.init(legs)
+  }
+  
+  override func speak() {
+    print("Persian speak")
+  }
+}
+
+class Lion : Cat {
+  
+  override init(_ legs: Int) {
+    super.init(legs)
+  }
+  override func speak() {
+    print("Lion speak")
+  }
+}
+
+print(
+  Lion(4).speak()
+)
+
+print(
+  Corgi(4).speak()
+)
