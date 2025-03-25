@@ -156,3 +156,72 @@ print(
 print(
   Corgi(4).speak()
 )
+
+
+protocol Building {
+  var room: Int { get set  }
+  var name: String {get}
+  var year: Int {get}
+  var cost: Double {get}
+}
+
+struct Home : Building {
+  var room: Int
+  var name: String
+  var year: Int
+  var cost: Double
+  
+  init(room: Int, name: String, year: Int, cost: Double) {
+    self.room = room
+    self.name = name
+    self.year = year
+    self.cost = cost
+  }
+  
+}
+
+struct Office : Building {
+  var room: Int
+  
+  var name: String
+  
+  var year: Int
+  
+  var cost: Double
+  
+  init(room: Int, name: String, year: Int, cost: Double) {
+    self.room = room
+    self.name = name
+    self.year = year
+    self.cost = cost
+  }
+}
+
+extension Building {
+  func summary()  {
+    print("Building Info: \(self.cost) + \(self.room) + \(self.name) + \(self.year)")
+  }
+  
+  mutating func addRoom(_ num: Int)  {
+    self.room += num
+  }
+}
+
+extension Home {
+  init(name : String, year : Int, cost : Double){
+    self.room = 0
+    self.name = name
+    self.year = year
+    self.cost = cost
+  }
+}
+
+var myHome: Home = Home(name: "MyHome", year: 2021, cost: 100000)
+myHome.summary()
+myHome.addRoom(10)
+myHome.summary()
+
+var myOffice: Office = Office(room: 10, name: "MyOffice", year: 2021, cost: 100000)
+myOffice.summary()
+myOffice.addRoom(10)
+myOffice.summary()
