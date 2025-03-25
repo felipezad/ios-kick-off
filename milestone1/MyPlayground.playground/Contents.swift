@@ -225,3 +225,14 @@ var myOffice: Office = Office(room: 10, name: "MyOffice", year: 2021, cost: 1000
 myOffice.summary()
 myOffice.addRoom(10)
 myOffice.summary()
+
+
+
+func test(from numbers : [Int]? ) -> Int {
+  return  numbers?.randomElement() ??  Int.random(in: 1...100)
+}
+
+let response = test(from: [1,2,3,4,5])
+
+print("Response is: \(response)" )
+print("Response is: \(test(from: nil))" )
