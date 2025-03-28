@@ -236,3 +236,151 @@ let response = test(from: [1,2,3,4,5])
 
 print("Response is: \(response)" )
 print("Response is: \(test(from: nil))" )
+
+
+
+// Create CLI programm with SOLID
+
+protocol Human {
+  var name : String { get }
+  
+  static var starSigns: [String] { get }
+}
+
+protocol Generation {
+
+  func talkAboutYourSelf()
+  
+  func checkStarSign(star sign: String?)
+  
+  init(name: String) // Add initializer
+
+}
+
+struct Millenium : Human, Generation {
+  
+  var name: String
+
+  
+  func talkAboutYourSelf() {
+    print("What's your star sign?")
+  }
+  
+  func checkStarSign(star sign: String?) {
+    guard let sign  = sign else {
+      print("No star sign! Are you even a human?")
+      return
+    }
+    
+    if(Millenium.starSigns.contains(sign)){
+      print("\(sign) is a valid star sign"  )
+    } else {
+      print( "Oh no you are not millenium")
+    }
+    
+  }
+  init(name: String) {
+    self.name = name
+  }
+}
+
+struct GenerationZ : Human, Generation {
+  func checkStarSign(star sign: String?) {
+    if let unwrappedSign = sign {
+      print("A real genZ doesn't have a star sign, you fake!")
+    }else {
+      print("I don't care about that")
+    }
+  }
+  
+  var name: String
+  
+  func talkAboutYourSelf() {
+    print("Wanna smoke with Me? ")
+  }
+  
+  init(name: String) {
+    self.name = name
+  }
+}
+
+struct Boomer : Human, Generation {
+  var name: String
+  
+  func checkStarSign(star sign: String?) {
+    print("In my times things were harder...")
+  }
+  
+  init(name: String) {
+    self.name = name
+  }
+}
+
+extension Generation {
+  func talkAboutYourSelf(){
+    print("Let's not engage in this topic")
+  }
+}
+
+extension Human {
+    static var starSigns: [String] {
+        return [
+            "Aries",       // March 21 - April 19
+            "Taurus",      // April 20 - May 20
+            "Gemini",      // May 21 - June 20
+            "Cancer",      // June 21 - July 22
+            "Leo",         // July 23 - August 22
+            "Virgo",       // August 23 - September 22
+            "Libra",       // September 23 - October 22
+            "Scorpio",     // October 23 - November 21
+            "Sagittarius", // November 22 - December 21
+            "Capricorn",   // December 22 - January 19
+            "Aquarius",    // January 20 - February 18
+            "Pisces"       // February 19 - March 20
+        ]
+    }
+}
+
+class PersonFactory {
+  static func createPerson<T: Generation>(type: T.Type, name: String) -> T {
+      return type.init(name: name)
+  }
+}
+
+
+class Main {
+  
+  func execute(){
+
+    print("=========================================")
+    print("Welcome to the generation factory program!")
+    print("=========================================")
+    
+    // Valid user-defined input
+    let millenium = PersonFactory.createPerson(type: Millenium.self, name: "Mary")
+    let genz = PersonFactory.createPerson(type: GenerationZ.self, name: "John")
+    let boomer = PersonFactory.createPerson(type: Boomer.self, name: "Mike")
+    
+    // Interact with each person
+    doSomething(person: millenium)
+    millenium.checkStarSign(star: nil)
+    millenium.checkStarSign(star: "Aquarius")
+    
+    print("=========================================")
+    doSomething(person: genz)
+    genz.checkStarSign(star: nil)
+    genz.checkStarSign(star: "Aquarius")
+    
+    print("=========================================")
+    doSomething(person: boomer)
+    boomer.checkStarSign(star: nil)
+    boomer.checkStarSign(star: "Aquarius")
+  }
+  
+  private func doSomething(person : Generation){
+    print("This \(person) is doing something")
+    person.talkAboutYourSelf()
+  }
+}
+
+Main().execute()
